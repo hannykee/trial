@@ -68,3 +68,5 @@ summarise(mean_income= mean(income))
 #그래프 만들기
 ggplot(data = sex_income, aes(x = sex, y= mean_income)) + geom_col()
 #col 과 bar의 차이점 유의-> 원자료를 이용한 막대그래프는 bar, 요약표를 통해 만들때는 col(x,y모두 찍어줌)
+
+#그래프 실제 활용 라이프핵 포인트 추가
