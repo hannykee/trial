@@ -1,4 +1,5 @@
 #연습문제3 - 급여계산
+#라이프핵 포인트
 
 #함수호출
 def calc_monthly_salary():

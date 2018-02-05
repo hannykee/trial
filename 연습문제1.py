@@ -1,4 +1,5 @@
 #1.연습문제
+#2. 라이프핵 포인트
 
 #함수
 def print_readable_bin():
