@@ -23,3 +23,5 @@ n4=water_melon(4)
 print("입력한 n:", nr)
 print("n이 3인 경우: " ,n3 )
 print("n이 4인 경우: " ,n4 )
+
+#라이프핵 포인트 추가

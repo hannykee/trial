@@ -16,3 +16,4 @@ if os==1:
         print(list1)    
         lock=a[i]
     
+#라이프핵 포인트 추가

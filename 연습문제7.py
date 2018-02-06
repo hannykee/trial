@@ -18,3 +18,6 @@ def getMiddle(a):
 #메인 코드
 a=input("하나의 단어를 입력하세요.")
 getMiddle(a)
+
+
+#라이프핵 포인트 추가
