@@ -69,4 +69,30 @@ summarise(mean_income= mean(income))
 ggplot(data = sex_income, aes(x = sex, y= mean_income)) + geom_col()
 #col 과 bar의 차이점 유의-> 원자료를 이용한 막대그래프는 bar, 요약표를 통해 만들때는 col(x,y모두 찍어줌)
 
-#그래프 실제 활용 라이프핵 포인트 추가
+
+#09-3 나이와 월급의 관계
+
+#데이터 구조 미리보기 과정
+class(welfare$birth)
+summary(welfare$birth)
+qplot(welfare$birth)
+
+#전처리 - 이상치와 결측치 제거
+table(is.na(welfare$birth))
+welfare$birth <- ifelse(welfare$birth==9999,NA,welfare$birth)
+
+
+#파생변수 만들기- 나이 (2015년도 조사본이므로 2015- 태어난 연도 -1)
+welfare$age <- 2015 - welfare$birth +1
+summary(welfare$age)
+qplot(welfare$age)
+
+#나이와 월급의 관계 분석하기 - 월급 평균표, 그래프 (dplyr 패키지)
+age_income <- welfare %>%
+filter(!is.na(income)%>%
+group_by(age)%>%
+summarise(mean_income =mean(income))
+
+head(age_income)
+
+ggplot(data = age_income, aes(x=age, y=mean_income)) + geom_line()
