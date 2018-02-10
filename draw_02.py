@@ -1,4 +1,8 @@
+#간단한 그림판 프로그램
+#마우스가 움직이는 동안 선이 그려지는 기능은 미탑재
+#완전히 마우스가 떨어지는 mouseDrop후에 선이 나타남.
 from tkinter import *
+
 
 ##변수##
 window=None

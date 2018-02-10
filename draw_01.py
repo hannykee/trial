@@ -1,3 +1,6 @@
+#간단한 그림판 프로그램 만들기
+#마우스 이벤트js 
+
 from tkinter import *
 
 ##변수##
