@@ -1,0 +1,81 @@
+getwd()
+setwd("c:\\r_temp")
+#instatll.packages("KoNLP")
+library(KoNLP) #한글 단어 분석기
+install.packages("wordcloud") 
+library(wordcloud)
+useSejongDic() #한글사전
+
+
+data1 <- readLines("seoul_new.txt")
+data1
+
+data2 <- sapply(data1,extractNoun,USE.NAMES=F)
+#sapply()여러 건의 데이터를 한꺼번에 저장하는 함수
+#extractNoun() 문장을 단어로 만든 후 명사만 추출
+data2
+
+#추출된 명사를 30개만 출력해서 확인
+head(unlist(data2),30)
+data3 <- unlist(data2)
+
+#출력 결과에서 원하지 않는 내용 걸러 내기
+#gsub("변경전글자","변경후글자","원본데이터")
+
+data3 <- gsub("\\d+","",data3)
+data3 <- gsub("서울시","",data3)
+data3 <- gsub("서울","",data3)
+data3 <- gsub("요청","",data3)
+data3 <- gsub("제안","",data3)
+data3 <- gsub(" ","",data3)
+data3 <- gsub("-","",data3)
+data3
+
+#파일로 저장한 후 테이블 형태로 변환하여 불러오기
+write(unlist(data3),"seoul_2.txt")
+
+#수정 완료된 파일을 read.table명령어로 다시 변수로
+data4 <- read.table("seoul_2.txt")
+data4
+
+#화면에 그래픽으로 출력하기 전에 text형태로 결과를 확인
+nrow(data4)
+#변수에 데이터가 몇 건이 있는지 조회
+
+wordcount <- table(data4)
+wordcount
+
+head(sort(wordcount, decreasing=T),20)
+
+data3 <- gsub("OO","",data3)
+data3 <- gsub("님","",data3)
+data3 <- gsub("한","",data3)
+data3 <- gsub("개선","",data3)
+data3 <- gsub("문제","",data3)
+data3 <- gsub("관리","",data3)
+data3 <- gsub("민원","",data3)
+data3 <- gsub("이용","",data3)
+data3 <- gsub("관련","",data3)
+data3 <- gsub("시장","",data3)
+
+##gsub for문으로 따로 저장하기
+
+
+##############
+
+write(unlist(data3),"seoul_3.txt")
+data4 <-read.table("seoul_3.txt")
+wordcount<-table(data4)
+head(sort(wordcount,decreasing = T),20)
+
+#word cloud 형태로 그래픽 출력
+library(RColorBrewer)
+palete <- brewer.pal(9,"Set3")
+
+#wordcloud에서 min.freq에 있는 항목이 언급된 횟수로 최소 1회 이상 언급된 단어만 출력하라
+wordcloud(names(wordcount),freq=wordcount,scale=c(5,1),
++rot.per = 0.25,min.freq = 1, random.order = F, random.color = T,colors = palete)
+
+legend(0.3,1,"서울시 응답소 요청사항 분석",cex=0.8,fill=NA,border=NA,
++bg="white",text.col="red",text.font=2,box.col="red")
+#범례 만들어주기
